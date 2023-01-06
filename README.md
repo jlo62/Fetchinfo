@@ -1,2 +1,3 @@
 # Fetchinfo
-Neofetch alternative
+Highly configurable Neofetch alternative
+
