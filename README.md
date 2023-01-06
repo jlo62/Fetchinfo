@@ -1,3 +1,3 @@
 # Fetchinfo
-Highly configurable Neofetch alternative
+Highly configurable and fast Neofetch alternative
 
