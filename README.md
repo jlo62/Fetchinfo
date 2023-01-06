@@ -1,0 +1,2 @@
+# Fetchinfo
+Neofetch alternative
