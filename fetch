@@ -1,0 +1,43 @@
+#! /bin/bash
+
+cd /home/$USER/Code/fetch/
+source config
+
+p=p
+
+get_pic () {
+    pic=$(sed -n $1"p" image )
+    pic=${pic::-1}
+    echo "$pic"
+}
+
+name="$USER@$(cat /etc/hostname)"
+echo -e "${Color}$(get_pic 1)$name${NoColor}"
+
+lname=${#name}
+for (( r=1 ; r<=$lname ; r++ ));
+do
+    u=$u$ULine
+
+done
+
+echo -e "${Color}$(get_pic 2)${NoColor}$u"
+echo -e "${Color}$(get_pic 3)${NoColor}"
+
+n=3
+
+for dir in *.conf
+do
+    if [ $n != $(wc -l < image) ]; then
+        n=$(( $n+1 ))
+    fi
+    source $dir
+    fname=${dir:2:$((${#dir}-7))}
+    echo -e "${Color}$(get_pic $n)$fname: ${NoColor}${!fname}"
+done
+n=$((n+1))
+
+for (( n=$n ; n<=$(wc -l < image) ; n++ ));
+do
+    echo -e "${Color}$(get_pic $n)${NoColor}"
+done

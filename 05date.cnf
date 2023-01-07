@@ -1,0 +1,1 @@
+date="$(date "+%H:%M %a %d/%h/%y")"
