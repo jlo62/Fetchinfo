@@ -1,18 +1,18 @@
 #! /bin/bash
 
-cd /home/$USER/.config/fetchinfo/
-source config
-
-p=p
+cd /home/$USER/.config/fetch/
+. config
+echo 0 > .tmp
 
 get_pic () {
-    pic=$(sed -n $1"p" image )
+	echo $(( $(cat .tmp)+1 )) >.tmp
+    pic=$(sed -n $(cat .tmp)"p" image )
     pic=${pic::-1}
-    echo "$pic"
+	echo -e "$pic"
 }
 
 name="$USER@$(cat /etc/hostname)"
-echo -e "${Color}$(get_pic 1)$name${NoColor}"
+echo -e "${Color}$(get_pic)${Color2}$name${NoColor}"
 
 lname=${#name}
 for (( r=1 ; r<=$lname ; r++ ));
@@ -21,23 +21,17 @@ do
 
 done
 
-echo -e "${Color}$(get_pic 2)${NoColor}$u"
-echo -e "${Color}$(get_pic 3)${NoColor}"
-
-n=3
+echo -e "${Color}$(get_pic)${Color3}$u${NoColor}"
+echo -e "${Color}$(get_pic)${NoColor}"
 
 for dir in *.conf
 do
-    if [ $n != $(wc -l < image) ]; then
-        n=$(( $n+1 ))
-    fi
-    source $dir
-    fname=${dir:2:$((${#dir}-7))}
-    echo -e "${Color}$(get_pic $n)$fname: ${NoColor}${!fname}"
+    . $dir
+    fname=${dir:2:-5}
+    echo -e "${Color}$(get_pic)${Color2}$fname: ${Color3}${!fname}${NoColor}"
 done
-n=$((n+1))
 
-for (( n=$n ; n<=$(wc -l < image) ; n++ ));
+while [ "$(cat .tmp)" != "$(wc -l < image)" ];
 do
-    echo -e "${Color}$(get_pic $n)${NoColor}"
+    echo -e "${Color}$(get_pic)${NoColor}"
 done
