@@ -1,12 +1,12 @@
 #! /bin/bash
 
-cd /home/$USER/.config/fetch/
+cd /home/$USER/Code/fetch/
 . config
 echo 0 > .tmp
 
 get_pic () {
 	echo $(( $(cat .tmp)+1 )) >.tmp
-    pic=$(sed -n $(cat .tmp)"p" image )
+    pic=$(sed -n $(cat .tmp)"p" $image )
     pic=${pic::-1}
 	echo -e "$pic"
 }
