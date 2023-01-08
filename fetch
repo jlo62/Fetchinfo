@@ -1,6 +1,6 @@
 #! /bin/bash
 
-cd /home/$USER/Code/fetch/
+cd /home/$USER/.config/fetchinfo/
 . config
 echo 0 > .tmp
 
